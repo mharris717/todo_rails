@@ -1,11 +1,8 @@
-class TodosController < ApplicationController
+class PostsController < ApplicationController
   skip_before_action :verify_authenticity_token
   def index_paged
-    puts params.inspect
     page = (params[:page] || 1).to_i
-    per_page = params[:per_page] || 10
-    
-    todos = Todo.page(page).per(per_page)
+    todos = Post.page(page).per(2)
     render json: todos, meta: {
       current_page: todos.current_page,
       next_page: todos.next_page,
@@ -15,20 +12,16 @@ class TodosController < ApplicationController
     }
   end
 
-  def index_plain
-    render json: Todo.all
-  end
-
   def index
-    index_paged
+    render json: Post.all
   end
-
+  
   def create
-    todo = Todo.create! params[:todo].permit(:name,:completed)
+    todo = Post.create! params[:todo].permit(:name,:completed)
     render json: todo
   end
   def update
-    todo = Todo.find(params[:id])
+    todo = Post.find(params[:id])
     todo.update_attributes! params[:todo].permit(:name,:completed)
     render json: todo
   end

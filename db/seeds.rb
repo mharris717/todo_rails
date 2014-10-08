@@ -6,6 +6,12 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Todo.delete_all
-Todo.create! name: "Clean Gutters", completed: false
-Todo.create! name: "Make Dinner", completed: false
+[Todo,Post].each do |cls|
+  cls.delete_all
+
+  (1..10).each do |i|
+    cls.create! name: "Clean Gutters #{i}", completed: false
+    cls.create! name: "Make Dinner #{i}", completed: false
+    cls.create! name: "More Stuff #{i}", completed: false
+  end
+end

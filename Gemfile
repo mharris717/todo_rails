@@ -28,4 +28,4 @@ end
 gem 'active_model_serializers'
 # gem 'devise'
 gem 'rack-cors', :require => 'rack/cors'
-# gem 'kaminari'
+gem 'kaminari'
